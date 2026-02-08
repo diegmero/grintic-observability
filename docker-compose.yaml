@@ -1,0 +1,41 @@
+services:
+  grafana:
+    image: grafana/grafana:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASS}
+      - GF_SERVER_DOMAIN=sre.grintic.com
+      - GF_SERVER_ROOT_URL=https://sre.grintic.com
+    volumes:
+      - grafana-data:/var/lib/grafana
+
+  loki:
+    image: grafana/loki:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3100:3100"
+    command: ["-config.file=/etc/loki/loki-config.yaml"]
+    volumes:
+      - ./loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki-data:/loki
+
+  alloy:
+    image: grafana/alloy:latest
+    restart: unless-stopped
+    command: ["run", "/etc/alloy/alloy-local-config.yaml"]
+    volumes:
+      - ./alloy-local-config.yaml:/etc/alloy/alloy-local-config.yaml:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  blackbox:
+    image: prom/blackbox-exporter:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9115:9115"
+
+volumes:
+  grafana-data:
+  loki-data:
