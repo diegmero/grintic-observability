@@ -12,17 +12,20 @@ common:
 schema_config:
   configs:
     - from: 2024-01-01
-      store: boltdb-shipper
-      object_store: filesystem
-      schema: v11
+      store: tsdb
+      object_store: s3
+      schema: v13
       index:
         prefix: index_
         period: 24h
 
 storage_config:
-  boltdb_shipper:
+  tsdb_shipper:
     active_index_directory: /loki/index
     cache_location: /loki/index_cache
+  aws:
+    s3: s3://${R2_ACCESS_KEY}:${R2_SECRET_KEY}@${R2_ENDPOINT}/sre-loki-logs
+    s3forcepathstyle: true
     
 limits_config:
   allow_structured_metadata: false
