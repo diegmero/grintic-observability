@@ -4,10 +4,6 @@ server:
 
 common:
   path_prefix: /loki
-  storage:
-    filesystem:
-      chunks_directory: /loki/chunks
-      rules_directory: /loki/rules
 
 schema_config:
   configs:
@@ -24,7 +20,8 @@ storage_config:
     active_index_directory: /loki/index
     cache_location: /loki/index_cache
   aws:
-    s3: ${R2_ENDPOINT}/${R2_BUCKET}
+    s3: s3://${R2_BUCKET}
+    endpoint: ${R2_ENDPOINT}
     s3forcepathstyle: true
     access_key_id: ${R2_ACCESS_KEY}
     secret_access_key: ${R2_SECRET_KEY}
