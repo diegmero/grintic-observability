@@ -37,4 +37,7 @@ ingester:
         store: inmemory
       replication_factor: 1
 
+querier:
+  query_ingesters_within: 3h
+
 
