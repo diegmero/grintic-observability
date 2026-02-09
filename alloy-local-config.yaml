@@ -30,7 +30,15 @@ loki.write "default" {
 }
 
 prometheus.exporter.blackbox "web" {
-  config = "{ modules: { http_2xx: { prober: http, timeout: 5s } } }"
+  config = <<YAML
+modules:
+  http_2xx:
+    prober: http
+    timeout: 5s
+    http:
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: true
+YAML
 
   target {
     name    = "sre-grintic"
@@ -38,6 +46,7 @@ prometheus.exporter.blackbox "web" {
     module  = "http_2xx"
   }
 }
+
 
 prometheus.scrape "blackbox" {
   targets    = prometheus.exporter.blackbox.web.targets
