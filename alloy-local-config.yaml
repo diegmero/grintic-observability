@@ -41,8 +41,8 @@ modules:
 YAML
 
   target {
-    name    = "sre-grintic"
-    address = "https://dash.grintic.com"
+    name    = "granapple"
+    address = "https://granappletours.com"
     module  = "http_2xx"
   }
 }
