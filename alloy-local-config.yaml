@@ -34,8 +34,8 @@ prometheus.exporter.blackbox "web" {
   config = "{ modules: { http_2xx: { prober: http, timeout: 5s } } }"
 
   target {
-    name    = "sre-grintic"
-    address = "https://dash.grintic.com"
+    name    = "granappletours"
+    address = "https://granappletours.com"
     module  = "http_2xx"
   }
 }
