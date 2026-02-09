@@ -17,7 +17,10 @@ services:
     restart: unless-stopped
     ports:
       - "127.0.0.1:3100:3100"
-    command: ["-config.file=/etc/loki/loki-config.yaml", "-config.expand-env=true"]
+    command:
+      - -config.file=/etc/loki/loki-config.yaml
+      - -config.expand-env=true
+      - -print-config-stderr=true
     volumes:
       - ./loki-config.yaml:/etc/loki/loki-config.yaml:ro
       - loki-data:/loki
