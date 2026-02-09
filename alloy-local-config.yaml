@@ -28,3 +28,25 @@ loki.write "default" {
   }
   external_labels = {}
 }
+
+prometheus.exporter.blackbox "web" {
+  config = "{ modules: { http_2xx: { prober: http, timeout: 5s } } }"
+
+  target {
+    name    = "sre-grintic"
+    address = "https://dash.grintic.com"
+    module  = "http_2xx"
+  }
+}
+
+prometheus.scrape "blackbox" {
+  targets    = prometheus.exporter.blackbox.web.targets
+  forward_to = [prometheus.remote_write.local.receiver]
+}
+
+prometheus.remote_write "local" {
+  endpoint {
+    url = "http://prometheus:9090/api/v1/write"
+  }
+}
+
