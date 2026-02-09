@@ -31,14 +31,23 @@ loki.write "default" {
 
 
 prometheus.exporter.blackbox "web" {
-  config = "{ modules: { http_2xx: { prober: http, timeout: 5s } } }"
+  config = `
+modules:
+  http_2xx:
+    prober: http
+    timeout: 5s
+    http:
+      preferred_ip_protocol: ip4
+      ip_protocol_fallback: true
+`
 
   target {
-    name    = "granappletours"
+    name    = "granapple"
     address = "https://granappletours.com"
     module  = "http_2xx"
   }
 }
+
 
 
 prometheus.scrape "blackbox" {
