@@ -20,8 +20,8 @@ storage_config:
     active_index_directory: /loki/index
     cache_location: /loki/index_cache
   aws:
-    s3: s3://${R2_BUCKET}
-    endpoint: ${R2_ENDPOINT}
+    s3: s3://dummy
+    endpoint: ${R2_ENDPOINT}/${R2_BUCKET}
     s3forcepathstyle: true
     region: us-east-1
     
