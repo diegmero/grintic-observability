@@ -34,6 +34,8 @@ services:
     image: grafana/alloy:latest
     restart: unless-stopped
     command: ["run", "/etc/alloy/alloy-local-config.yaml"]
+    ports:
+      - "12345:12345"
     volumes:
       - ./alloy-local-config.yaml:/etc/alloy/alloy-local-config.yaml:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
