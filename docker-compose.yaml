@@ -30,7 +30,6 @@ services:
       - AWS_REGION=us-east-1
       - AWS_EC2_METADATA_DISABLED=true
 
-
   alloy:
     image: grafana/alloy:latest
     restart: unless-stopped
@@ -45,6 +44,17 @@ services:
     ports:
       - "127.0.0.1:9115:9115"
 
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:9090:9090"
+    command:
+      - --web.enable-remote-write-receiver
+    volumes:
+      - prometheus-data:/prometheus
+
 volumes:
   grafana-data:
   loki-data:
+  prometheus-data:
