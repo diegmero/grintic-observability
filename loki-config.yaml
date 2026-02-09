@@ -20,10 +20,12 @@ storage_config:
     active_index_directory: /loki/index
     cache_location: /loki/index_cache
   aws:
-    s3: s3://dummy
-    endpoint: ${R2_ENDPOINT}/${R2_BUCKET}
+    bucketnames: ${R2_BUCKET}
+    endpoint: 71d93212e29db096f32d5456e8ddf63c.r2.cloudflarestorage.com
     s3forcepathstyle: true
+    insecure: false
     region: us-east-1
+
     
 limits_config:
   allow_structured_metadata: false
