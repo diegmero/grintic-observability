@@ -23,7 +23,7 @@ storage_config:
     s3: s3://${R2_BUCKET}
     endpoint: ${R2_ENDPOINT}
     s3forcepathstyle: true
-    region: auto
+    region: us-east-1
     
 limits_config:
   allow_structured_metadata: false
