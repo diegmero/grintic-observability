@@ -46,6 +46,16 @@ modules:
     address = "https://granappletours.com"
     module  = "http_2xx"
   }
+  target {
+    name    = "dash"
+    address = "https://dash.grintic.com"
+    module  = "http_2xx"
+  }
+  target {
+    name    = "grintic"
+    address = "https://grintic.com"
+    module  = "http_2xx"
+  }
 }
 
 
