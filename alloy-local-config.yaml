@@ -29,20 +29,13 @@ loki.write "default" {
   external_labels = {}
 }
 
+
 prometheus.exporter.blackbox "web" {
-  config = <<YAML
-modules:
-  http_2xx:
-    prober: http
-    timeout: 5s
-    http:
-      preferred_ip_protocol: ip4
-      ip_protocol_fallback: true
-YAML
+  config = "{ modules: { http_2xx: { prober: http, timeout: 5s } } }"
 
   target {
-    name    = "granapple"
-    address = "https://granappletours.com"
+    name    = "sre-grintic"
+    address = "https://dash.grintic.com"
     module  = "http_2xx"
   }
 }
