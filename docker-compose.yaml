@@ -20,7 +20,6 @@ services:
     command:
       - -config.file=/etc/loki/loki-config.yaml
       - -config.expand-env=true
-      - -print-config-stderr=true
     volumes:
       - ./loki-config.yaml:/etc/loki/loki-config.yaml:ro
       - loki-data:/loki
